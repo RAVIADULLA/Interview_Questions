@@ -341,7 +341,8 @@ How do you detect and remove duplicate records in SQL using a CTE?
 WITH duplicate_cte AS (
 SELECT employee_id,
 ROW_NUMBER() OVER (PARTITION BY first_name, last_name, department ORDER BY employee_id) AS row_num
-FROM employees)  
+FROM employees) 
+
 DELETE FROM employees WHERE employee_id IN ( SELECT employee_id FROM duplicate_cte WHERE row_num > 1);
 ------------------------------------------------------------------------------------------------------------------
 Write a query to find the employee who generated the maximum revenue last year
@@ -406,7 +407,7 @@ WITH t AS (
 SELECT 
 user_id,
 login_date,
-login_date - ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY login_date) AS grp  --  output date will be same, so we can group by dates as shown below
+login_date - ROW_NUMBER() OVER (PARTITION BY user_id ORDER BY login_date) AS grp  --  output date will be same, so we can use group by dates as shown below
 FROM logins
 )
 SELECT user_id
@@ -648,14 +649,6 @@ SUBSTR(full_name, 1, INSTR(full_name, ' ') - 1) AS first_name,
 SUBSTR(full_name, INSTR(full_name, ' ') + 1)   AS last_name
 FROM (
 SELECT 'ravi adulla' AS full_name FROM dual
-);
-
-snow sql:
-SELECT
-SPLIT_PART(full_name, ' ', 1) AS first_name,
-SPLIT_PART(full_name, ' ', 2) AS last_name
-FROM (
-SELECT 'ravi adulla' AS full_name
 );
 
 ----------------------------------------------------------------------------------------------------------  
@@ -950,6 +943,7 @@ WHERE ROWID IN (
     WHERE rn > 1
 );
 -----------------------------------------------------------------------------------------------
+
 
 
 
