@@ -1,0 +1,138 @@
+storage name : s3://raviadulla-snowflake-2025/snowflake_inputfiles/
+polciy : snowflake_access  --- create policy and json file level permission like getobject, putobject, deleteobjet
+role : mysnowflakerole  -- 
+
+Role ARN :  arn:aws:iam::245706660707:role/mysnowflakerole
+STORAGE_AWS_ROLE_ARN = arn:aws:iam::245706660707:role/mysnowflakerole
+
+create or replace storage integration s3_int
+type = external_stage
+storage_provider = 'S3'
+enabled = true
+storage_aws_role_arn = 'arn:aws:iam::245706660707:role/mysnowflakerole'
+storage_allowed_locations = ('s3://raviadulla-snowflake-2025/snowflake_inputfiles/')
+
+describe integration s3_int;
+
+update below values in role trust policy.
+
+STORAGE_AWS_IAM_USER_ARN = arn:aws:iam::829545265689:user/externalstages/ci71qa0000
+STORAGE_AWS_EXTERNAL_ID = MBA00126_SFCRole=4_ck+ykz1/0oL4hTvOVYnB7fwK/6I=
+
+
+
+create stage my_s3_stage
+storage_integration = s3_int
+url = 's3://raviadulla-snowflake-2025/snowflake_inputfiles/'
+;
+
+list@my_s3_stage
+
+department_id	department_name	location
+
+create  or replace table emp_s3 (department_id integer,department_name string, location_name string )
+
+select * from emp_s3;
+
+
+copy into emp_s3
+from @my_s3_stage
+ON_ERROR = 'CONTINUE';
+
+delete from emp_s3;
+
+copy into emp_s3
+from @my_s3_stage
+ON_ERROR = 'CONTINUE'
+force = true
+;
+
+copy into emp_s3
+from @my_s3_stage/dep.csv
+file_format = (type = 'csv' field_delimiter = '\,' error_on_column_count_mismatch=false)
+ON_ERROR = CONTINUE
+force = true
+;
+
+select * from emp_s3;
+
+desc table emp_s3;
+
+copy into emp_s3
+from @my_s3_stage/dep.csv
+file_format = (type = 'csv' field_delimiter = '\,' skip_header = 1 error_on_column_count_mismatch=false)
+ON_ERROR = CONTINUE
+force = true
+;
+
+copy into emp_s3
+from @my_s3_stage/dep.csv
+file_format = (type = 'csv' field_delimiter = '\,' skip_header = 1 error_on_column_count_mismatch=false)
+ON_ERROR = CONTINUE
+force = true
+purge = true
+;
+
+list@my_s3_stage
+
+copy into emp_s3
+from @my_s3_stage/
+files = ('emp1.csv','emp2.csv')
+pattern = '.*sample_[1-2].csv'
+file_format = (type = 'csv' field_delimiter = ',')
+ON_ERROR = CONTINUE
+force = true
+;
+
+copy into emp_s3
+from @my_s3_stage/dep.csv
+file_format = (type = 'csv' field_delimiter = ',')
+ON_ERROR = CONTINUE
+validation_mode = return_all_errors
+force = true
+;
+
+copy into emp_s3
+from @my_s3_stage/dep.csv
+file_format = (type = 'csv' field_delimiter = ',')
+ON_ERROR = CONTINUE
+validation_mode = return_2_rows
+force = true
+;
+
+select last_query_id (-1)
+-----------------------------------------------------------------------------
+
+create  or replace table emp_pipe (department_id integer,department_name string, location_name string )
+
+create or replace pipe mypipe
+auto_ingest = true
+as
+copy into emp_pipe
+from @my_s3_stage
+file_format = (type = csv field_delimiter = ',')
+ON_ERROR = CONTINUE
+
+show pipes;
+
+notification_chanel = arn:aws:sqs:us-east-2:829545265689:sf-snowpipe-AIDA4CJGAHIM5I2AAF4X6-5APzP5UO8UnpFcCcxSF9kw
+
+select system$pipe_status('mypipe')
+
+delete from emp_pipe;
+
+select * from emp_pipe;
+
+select * from table(information_schema.copy_history(table_name=>'emp_pipe',start_time=>dateadd(hours,-1,current_timestamp())));
+
+create or replace pipe mypipe
+auto_ingest = false
+as
+copy into emp_pipe
+from @my_s3_stage
+file_format = (type = csv field_delimiter = ',')
+ON_ERROR = CONTINUE
+
+SELECT
+  SYSTEM$CANCEL_QUERY('01becc0b-0002-9d70-0002-62df00093542');
+
