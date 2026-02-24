@@ -943,6 +943,40 @@ WHERE ROWID IN (
     WHERE rn > 1
 );
 -----------------------------------------------------------------------------------------------
+How do you split dynamic comma-separated values in Oracle?
+
+SELECT t.id,
+       TRIM(REGEXP_SUBSTR(t.name, '[^,]+', 1, LEVEL)) AS name
+FROM your_table t
+CONNECT BY
+       REGEXP_SUBSTR(t.name, '[^,]+', 1, LEVEL) IS NOT NULL
+       AND PRIOR t.id = t.id
+       AND PRIOR SYS_GUID() IS NOT NULL
+START WITH t.id IS NOT NULL;
+
+
+WITH RECURSIVE split_data AS (
+    -- Anchor row
+    SELECT
+        id,
+        SUBSTRING_INDEX(name, ',', 1) AS value,
+        SUBSTRING(name, LENGTH(SUBSTRING_INDEX(name, ',', 1)) + 2) AS remaining
+    FROM your_table
+
+    UNION ALL
+
+    -- Recursive part
+    SELECT
+        id,
+        SUBSTRING_INDEX(remaining, ',', 1),
+        SUBSTRING(remaining, LENGTH(SUBSTRING_INDEX(remaining, ',', 1)) + 2)
+    FROM split_data
+    WHERE remaining <> ''
+)
+
+SELECT id, value AS name
+FROM split_data;
+-------------------------------------------------------------------
 
 
 
