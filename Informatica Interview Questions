@@ -18,6 +18,9 @@ how do you migrate the iics components by using cicd pipelnes(Github, Azure devO
 what are main differences between pc and iics in architecture wise?
 what are main differences between pc and iics as a developer?
 how do you design handle update else insert in iics as we do not have update strategy transformaation?
+how to you design streaming pipeline in iics, what is your thought process?
+how to you process multiple files in iics?
+how to you process multiple files from s3 bucket with single pipeline and load into table? (IAM Policy, ARN, Trust clarification, Role)
 
 
 
