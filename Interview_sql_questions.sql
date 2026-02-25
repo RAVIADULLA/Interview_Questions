@@ -977,6 +977,28 @@ WITH RECURSIVE split_data AS (
 SELECT id, value AS name
 FROM split_data;
 -------------------------------------------------------------------
+emp: empid,empname,empsal,deptid
+ 
+dept:deptid,deptname
+ 
+Output 1: deptname,max_sal,min_sal
+Output 2: empname,d.deptname,max(sal) as max_sal ,min(sal) as min_sal
+
+SELECT d.deptname,
+       MAX(e.empsal) AS max_sal,
+       MIN(e.empsal) AS min_sal
+FROM emp e
+JOIN dept d
+  ON e.deptid = d.deptid
+GROUP BY d.deptname;
+
+SELECT e.empname,
+       d.deptname,
+       MAX(e.empsal) OVER (PARTITION BY e.deptid) AS max_sal,
+       MIN(e.empsal) OVER (PARTITION BY e.deptid) AS min_sal
+FROM emp e
+JOIN dept d
+  ON e.deptid = d.deptid;
 
 
 
