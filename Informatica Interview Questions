@@ -1,7 +1,19 @@
 Informatica power center
 -----------------------------------------------------------------------
 
-what are the passive and active transformations? why router is active transformation on what on based
+what are the passive and active transformations? why router is active transformation on what on based?
+how do you desing type 2 mapping in pc and explain clearly with example?
+Performance tuning by using partitions and PDO, Parallel processing? pass throgh, key range, fixed partion,
+what is the normal load and bulk load?
+How do you improve the performance of the lookups, aggregator, Joiner, sorter transformation?
+how are we finding the bottle neck by using the Busy% and Idle time of the reader, writer, transoformation threads?
+Dynamic file generation by using TCL transformation? 
+what is MD5 functionality ? 32-bit check sum, hash byte value
+Limitations of full pushdown optimization?
+
+
+
+
 
 
 
@@ -10,17 +22,59 @@ what are the passive and active transformations? why router is active transforma
 
 Informatica IICS
 --------------------------------------------------------------------------------------------------------
-What exactly, you are using the migration factory to migrate the power center mapping into iics?
+What exactly, how you are using the migration factory to migrate the power center mapping into iics? (manual creation, get pdo query, parallel validation )
 what are challanges you have faced while migrating power center to iics?
-what is the paramsetcli in iics and why it is used explaint with expain?
-how do you design scd type in iics?
+what is the paramsetcli in iics and why it is used explaint with expain? email task, sub task flow, data task (param file name , path)
+how do you design scd2 type in iics?  incoming fields disabled in sequence generator, and target operation key column and map the update field name?
 how do you migrate the iics components by using cicd pipelnes(Github, Azure devOps)
 what are main differences between pc and iics in architecture wise?
 what are main differences between pc and iics as a developer?
 how do you design handle update else insert in iics as we do not have update strategy transformaation?
 how to you design streaming pipeline in iics, what is your thought process?
 how to you process multiple files in iics?
-how to you process multiple files from s3 bucket with single pipeline and load into table? (IAM Policy, ARN, Trust clarification, Role)
+how to you process multiple files from s3 bucket with single pipeline and load into table? (IAM Policy, ARN, Trust clarification, Role)? access, secret, bucket, region name
+how do you recover the mapping task by using recovery strategy in iincs?
+what happens when any mapping task in submitted to run? what role secure agent will perform?
+what is secure agent? why it used?
+what is secure agent group, and how you achive the high availability and load balancing?
+how do you handle shared folder, update strategy concepts in iics?
+what iics architecture ? multi tenat repositories, informatica cloud repositories? secure agent https connection, firewall, only meta data is shared? metadata can not be read
+how do you set the dependency between data task in iics? assignment task, decision task?
+what is the difference between sycronizastion task and replication task?
+how do you process multiple files or tables without using replication task? mass injestion task, file, database, streamin, file listner (file lister componet)?
+what happens when you publish the mapping in iics?
+what is in parameter and in out parameter?
+what is the dynamic linking?
+what is the dynamic task ? what is the schema drift and how do you handle dynamic schema level changes?  
+what are the difference between linear and sequential taskflow?
+data preview in iics mapping, should be valid till that point?
+Expression transformation, to include or exclude required columns in the expression to pass down stream transformation?
+Data transfer task? 
+Data task, throw task, notification, jump step task?
+system variable? $lastruntime, $lastrundate, we can not override them?
+how do you handle, IN OUT paramers between mapping task? how do you pass the output value from one mapping to another mapping?
+Export as zip file, inport in target folder, change the source and target connections, runtime enviroments?
+Intelligent Structure model(structure parser transformation) in iics? XML, JSON, Excel, Hierachical Schema (Hierachical parser transformation), indirect file method
+Email nofification?
+Task flows, Binding Rest API / Event wait mode, Parallel?
+Task flow status is 1 completed successfully, 2 completed with errors, 3 task failed to complete?
+taskflow with custom error handling?
+Rest API --> Rest V2 connector, swagger file, actions, PUT, GET,base path, API Path,POST Man,  web transformation, process creation in CAI?
+TCL transformation in IICS?
+what are the Taskflow Statuses? started, queed, running, success, warning, suspend(when upsteam task is failed), failed
+resume a taskflow from faulted step?
+resume a taskflow skipping the faulter step 
+Marcors process (to filter the record if it any fields is having the null value), input macro, output macro, ltrin('source fileds'),' ', ''), completely parameterization, partial parameterization at MT task,
+OPR_Sum(iif(isnull('source fields')=0,1,0)
+Masking task?
+Administration : roles, users, groups, permissions, object level permissions, secure agent installation, shared secure agent groups?
+what is the dynamic lookup in iics? 0-  no change, 1- insert, 2 -  update, we can ignore in comparision, new lookup row
+cli.bat/sh RunAjobutility -n "taskname" -t type of task fp 'folder' w wait for the previous task -u username -p pwd
+how do you update a record in s3 by using iics?
+how to you process large table (sequel server) into s3 (what parameters are considered)
+have you configured customizwd logs in iics?
+two new fields are added in source table, does it impact pipeline in iics? *(star should not use), mentioned the column names in the query, target is not connected, syncornize,
+
 
 
 
