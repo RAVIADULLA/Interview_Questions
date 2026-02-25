@@ -1,7 +1,7 @@
 Informatica power center
+-----------------------------------------------------------------------
 
-what are the passive and active transformation?
-why router is active transformation?
+what are the passive and active transformations? why router is active transformation on what on based
 
 
 
@@ -9,15 +9,16 @@ why router is active transformation?
 
 
 Informatica IICS
-
-Zensar:
+--------------------------------------------------------------------------------------------------------
 What exactly, you are using the migration factory to migrate the power center mapping into iics?
-what challanges you have faced while migrating power center to iics?
+what are challanges you have faced while migrating power center to iics?
 what is the paramsetcli in iics and why it is used explaint with expain?
 how do you design scd type in iics?
 how do you migrate the iics components by using cicd pipelnes(Github, Azure devOps)
 what are main differences between pc and iics in architecture wise?
 what are main differences between pc and iics as a developer?
+how do you design handle update else insert in iics as we do not have update strategy transformaation?
+
 
 
 
