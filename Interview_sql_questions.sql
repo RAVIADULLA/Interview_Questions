@@ -1019,6 +1019,9 @@ SELECT e.empname,
 FROM emp e
 JOIN dept d
   ON e.deptid = d.deptid;
+-----------------------------------------------------------------------------------------
+what is the befference betwee cte and sub query
+
 
 
 
