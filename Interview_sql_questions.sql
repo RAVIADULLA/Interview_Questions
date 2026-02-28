@@ -32,7 +32,6 @@ FROM    emp e
 START WITH e.manager_id IS NULL
 CONNECT BY PRIOR e.emp_id = e.manager_id;
 
-
 -- start at emp_id and flip the CONNECT BY to walk upward:
 
 SELECT  e.empno,
@@ -43,6 +42,17 @@ FROM    emp e
 START WITH e.empno = :empno
 CONNECT BY PRIOR e.mgr = e.empno;
 --------------------------------------------------------------------------------------------
+Co related sub query and sub query
+
+SQL> SELECT * FROM Emp  
+WHERE Deptno IN  
+(SELECT Deptno FROM Dept);
+
+SQL> SELECT a.* FROM Emp e  
+WHERE Sal >=  
+(SELECT AVG(Sal) FROM Emp a  WHERE a.Deptno = e.Deptno  GROUP BY  a.Deptno); 
+
+---------------------------------------------------------------------------------------------------
 -- waq to get salaries more than average salary -- approach 1
 select *
 from emp e
@@ -999,6 +1009,7 @@ SELECT e.empname,
 FROM emp e
 JOIN dept d
   ON e.deptid = d.deptid;
+
 
 
 
