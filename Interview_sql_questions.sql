@@ -1022,6 +1022,35 @@ JOIN dept d
 -----------------------------------------------------------------------------------------
 what is the befference betwee cte and sub query
 
+A subquery is an inline nested query used inside another query, 
+whereas a CTE is a named temporary result set defined using WITH that improves readability,
+supports recursion, and can be referenced multiple times within the same statement. Functionally they often produce the same result,
+and performance depends on the optimizer.
+
+       SELECT name, salary
+FROM employees
+WHERE salary > (
+    SELECT AVG(salary)
+    FROM employees
+);
+
+WITH avg_salary AS (
+    SELECT AVG(salary) AS avg_sal
+    FROM employees
+)
+SELECT name, salary
+FROM employees, avg_salary
+WHERE salary > avg_sal;
+
+Feature	             Subquery	                     CTE
+Structure	             Nested inside main query	       Defined before main query using WITH
+Readability	             Can become complex if deeply nested	Cleaner and more readable for complex logic
+Reusability in same query  Must repeat the subquery	       Can reference multiple times
+Recursive support	       ❌ No	                                   ✅ Yes (Recursive CTE)
+Scope	Only where written	Whole SQL statement
+Optimization	Optimizer may merge/inline	                      Oracle may inline or materialize (depends on plan)
+
+
 -------------------------------------------------------------------------------------------------
 
 Feature	Subquery	    CTE	             Temporary Table (TMP) 	CTAS	                                  View
@@ -1030,6 +1059,10 @@ Life Time	Temporary	    Temporary	Temporary    Permanent	              Permanent
 When Deleted	End of query	    End of query	      End of session (or commit, depending on type)	Drop (DDL)	       Drop (DDL)
 Scope	       Single query	   Single query	      Multiple queries (within session)	Multiple queries	              Multiple queries
 Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
+
+---------------------------------------------------------------------------------------------------------------------------------
+what is the difference between subquery and cte function in sql?
+
 
 
 
