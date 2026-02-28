@@ -53,6 +53,16 @@ WHERE Sal >=
 (SELECT AVG(Sal) FROM Emp a  WHERE a.Deptno = e.Deptno  GROUP BY  a.Deptno); 
 
 ---------------------------------------------------------------------------------------------------
+Inline View:  
+If we write a select statement in from clause that is nothing but inline view. 
+Example: 
+SQL> SELECT a.First_Name, a.Employee_ID, b.Salary, b.Department_ID  
+FROM Employees a, 
+       (SELECT   MAX (Salary) Salary, Department_ID FROM Employees 
+        GROUP BY Department_ID) b 
+ WHERE a.Salary = b.Salary AND a.Department_ID = b.Department_ID;
+
+------------------------------------------------------------------------------------------------------
 -- waq to get salaries more than average salary -- approach 1
 select *
 from emp e
@@ -1009,6 +1019,7 @@ SELECT e.empname,
 FROM emp e
 JOIN dept d
   ON e.deptid = d.deptid;
+
 
 
 
