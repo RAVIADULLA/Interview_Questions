@@ -1022,6 +1022,15 @@ JOIN dept d
 -----------------------------------------------------------------------------------------
 what is the befference betwee cte and sub query
 
+-------------------------------------------------------------------------------------------------
+
+Feature	Subquery	    CTE	             Temporary Table (TMP) 	CTAS	                                  View
+Storage	Memory	Memory	    Disk	             Disk	                     No storage (logical definition only)
+Life Time	Temporary	    Temporary	Temporary    Permanent	              Permanent
+When Deleted	End of query	    End of query	      End of session (or commit, depending on type)	Drop (DDL)	       Drop (DDL)
+Scope	       Single query	   Single query	      Multiple queries (within session)	Multiple queries	              Multiple queries
+Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
+
 
 
 
