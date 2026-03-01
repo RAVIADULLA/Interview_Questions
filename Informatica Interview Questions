@@ -16,7 +16,7 @@ roles and responsibilites of lead developer, requirement analysis, planning esti
 deployment, and support, documentation, communication and coordination?
 if suddenly secure agent crashes, how do you recove the pipe line, last commit value, full load, load the remaining data?
 what is the incremental approach in your project, watermark table?
-how to check dependency on source, repo querie?
+
 
 
 
@@ -80,8 +80,9 @@ cli.bat/sh RunAjobutility -n "taskname" -t type of task fp 'folder' w wait for t
 how do you update a record in s3 by using iics?
 how to you process large table (sequel server) into s3 (what parameters are considered)
 have you configured customizwd logs in iics?
-two new fields are added in source table, does it impact pipeline in iics? *(star should not use), mentioned the column names in the query, target is not connected, syncornize,
-
+two new fields are added in source table, does it impact pipeline in iics? *(star should not use), mentioned the column names in the query,
+target is not connected, syncornize?
+how to check dependency on source object, repo querie?
 
 
 
