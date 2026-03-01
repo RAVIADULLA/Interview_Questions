@@ -16,6 +16,7 @@ roles and responsibilites of lead developer, requirement analysis, planning esti
 deployment, and support, documentation, communication and coordination?
 if suddenly secure agent crashes, how do you recove the pipe line, last commit value, full load, load the remaining data?
 what is the incremental approach in your project, watermark table?
+what is the difference between informatica pc param file and iics paramset cli?
 
 
 
