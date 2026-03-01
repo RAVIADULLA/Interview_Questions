@@ -15,7 +15,8 @@ how do you present when we have a call with technical and business users?
 roles and responsibilites of lead developer, requirement analysis, planning estimation, design and architecture, development, coding, team leadership(asssign task, get progress,), testing, support uat, qa,
 deployment, and support, documentation, communication and coordination?
 if suddenly secure agent crashes, how do you recove the pipe line, last commit value, full load, load the remaining data?
-what is the incremental approach in your project, watermark table, 
+what is the incremental approach in your project, watermark table?
+how to check dependency on source, repo querie?
 
 
 
