@@ -812,7 +812,7 @@ from Employee e Inner Join Department
 on e.DepartmentId = Department.Id
 where (Select count(Distinct m.Salary) from Employee m where m.DepartmentId = e.DepartmentId and m.Salary > e.Salary) < 3;
 ----------------------------------------------------------------------------------------
-Example 1: Write a solution to display the records with three or more rows with consecutive id's, and the number of people is greater than or equal to 100 for each.
+Example 1: Write a solution to display the records with three or more rows with consecutive id, and the number of people is greater than or equal to 100 for each.
 
 Explanation: 
 The four rows with ids 5, 6, 7, and 8 have consecutive ids and each of them has >= 100 people attended. Note that row 8 was included even though the visit_date was not the next day after row 7.
@@ -963,7 +963,10 @@ WHERE ROWID IN (
     WHERE rn > 1
 );
 -----------------------------------------------------------------------------------------------
-How do you split dynamic comma-separated values in Oracle?
+How do you split dynamic comma-separated values in Oracle?, 
+table
+Id,name
+1,"a,b,c,d"
 
 SELECT t.id,
        TRIM(REGEXP_SUBSTR(t.name, '[^,]+', 1, LEVEL)) AS name
@@ -1047,21 +1050,20 @@ Structure	             Nested inside main query	       Defined before main query
 Readability	             Can become complex if deeply nested	Cleaner and more readable for complex logic
 Reusability in same query  Must repeat the subquery	       Can reference multiple times
 Recursive support	       ❌ No	                                   ✅ Yes (Recursive CTE)
-Scope	Only where written	Whole SQL statement
-Optimization	Optimizer may merge/inline	                      Oracle may inline or materialize (depends on plan)
-
+Scope	                    Only where written	               Whole SQL statement
+Optimization	             Optimizer may merge/inline	        Oracle may inline or materialize (depends on plan)
 
 -------------------------------------------------------------------------------------------------
 
 Feature	Subquery	    CTE	             Temporary Table (TMP) 	CTAS	                                  View
 Storage	Memory	Memory	    Disk	             Disk	                     No storage (logical definition only)
-Life Time	Temporary	    Temporary	Temporary    Permanent	              Permanent
+Life Time	Temporary	    Temporary	             Temporary                    Permanent	                            Permanent
 When Deleted	End of query	    End of query	      End of session (or commit, depending on type)	Drop (DDL)	       Drop (DDL)
 Scope	       Single query	   Single query	      Multiple queries (within session)	Multiple queries	              Multiple queries
 Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
 
 ---------------------------------------------------------------------------------------------------------------------------------
-what is the difference between subquery and cte function in sql?
+
 
 
 
