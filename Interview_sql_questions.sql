@@ -815,7 +815,8 @@ where (Select count(Distinct m.Salary) from Employee m where m.DepartmentId = e.
 Example 1: Write a solution to display the records with three or more rows with consecutive id, and the number of people is greater than or equal to 100 for each.
 
 Explanation: 
-The four rows with ids 5, 6, 7, and 8 have consecutive ids and each of them has >= 100 people attended. Note that row 8 was included even though the visit_date was not the next day after row 7.
+The four rows with ids 5, 6, 7, and 8 have consecutive ids and each of them has >= 100 people attended. Note that row 8 was included even though the visit_date 
+was not the next day after row 7.
 The rows with ids 2 and 3 are not included because we need at least three consecutive ids.
 
 Input: 
@@ -1063,6 +1064,7 @@ Scope	       Single query	   Single query	      Multiple queries (within session
 Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
