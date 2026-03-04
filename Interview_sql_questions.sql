@@ -47,6 +47,7 @@ why we go for the sub queries in sequel
 We use subqueries in SQL when the result of one query is needed to complete another query. They are mainly used for filtering based on aggregated values,
 checking existence of related records, performing row-by-row comparisons, and treating query results as temporary tables.
 Subqueries improve readability and help solve complex conditions that cannot be directly handled using a single query.
+       
 ------------------------------------------------------------------------------------------------
 Co related sub query and sub query
 
@@ -192,12 +193,12 @@ they cannot be used in the WHERE clause. HAVING allows us to apply conditions on
 
 this is the input data  
 enrollid	carriermemid	planid	effdate	termdate
-1	101	A	01-01-2023	30-06-2023
-2	101	A	01-07-2023	31-12-2023
-3	101	B	15-01-2024	30-06-2024
-4	102	C	01-03-2023	31-08-2023
-5	102	C	01-09-2023	28-02-2024
-6	102	D	02-03-2024	31-08-2024
+1	101	A	       01-01-2023	     30-06-2023
+2	101	A	       01-07-2023	     31-12-2023
+3	101	B	       15-01-2024	     30-06-2024
+4	102	C	       01-03-2023	     31-08-2023
+5	102	C	       01-09-2023	     28-02-2024
+6	102	D	       02-03-2024	     31-08-2024
 
 i want output like below data in oracle 
 
@@ -266,9 +267,7 @@ FROM (SELECT emp_id, address, RANK () OVER (PARTITION BY emp_id ORDER BY emp_id,
 GROUP BY emp_id;
 -------------------------------------------------------------------------------------------------------------
 -- How to display alternative rows in a table? 
-SQL> SELECT * FROM emp 
-WHERE (ROWID, 0) IN  
-(SELECT ROWID, MOD (ROWNUM, 2) FROM emp); 
+SQL> SELECT * FROM emp  WHERE (ROWID, 0) IN  (SELECT ROWID, MOD (ROWNUM, 2) FROM emp); 
 
 -------------------------------------------------------------------------------------------------------------
 -- Hierarchical queries 
@@ -276,7 +275,7 @@ WHERE (ROWID, 0) IN
 --result, but process the child rows. 
 SQL> SELECT department_id, employee_id, last_name, job_id, salary 
 FROM employees 
-WHERE last_name  = 'Higgins' 
+WHERE last_name  != 'Higgins' 
 START WITH manager_id IS NULL 
 CONNECT BY PRIOR employee_id = manager_id; 
 ----------------------------------------------------------------------------------------------------------------
@@ -714,12 +713,10 @@ A PIVOT query converts rows into columns (a cross-tab format).
 
 SELECT *
 FROM (
-SELECT column_to_group, column_to_pivot, value_column
-FROM your_table
+SELECT column_to_group, column_to_pivot, value_column FROM your_table
 )
 PIVOT (
-AGG_FUNCTION(value_column)
-FOR column_to_pivot IN (value1, value2, value3 ...)
+AGG_FUNCTION(value_column) FOR column_to_pivot IN (value1, value2, value3 ...)
 );
 
 | EMP | MONTH | AMOUNT |
@@ -1072,6 +1069,7 @@ Scope	       Single query	   Single query	      Multiple queries (within session
 Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
