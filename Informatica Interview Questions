@@ -37,7 +37,8 @@ what is the paramsetcli in iics and why it is used explaint with expain? email t
 how do you design scd2 type in iics?  incoming fields disabled in sequence generator, and target operation key column and map the update field name?
 how do you migrate the iics components by using cicd pipelnes(Github, Azure devOps)
 what are main differences between pc and iics in architecture wise?
-what are main differences between pc and iics as a developer?
+what are main differences between pc and iics as a developer?(update strategy, data preview, sycronization, replication, dynamic, Mass Ingestion, ISM, Taskflow as 
+API, Schema Drift, syncronize the source latest defination, architecture)
 how do you design handle update else insert in iics as we do not have update strategy transformaation?
 how to you design streaming pipeline in iics, what is your thought process?
 how to you process multiple files in iics?
