@@ -42,6 +42,12 @@ FROM    emp e
 START WITH e.empno = :empno
 CONNECT BY PRIOR e.mgr = e.empno;
 --------------------------------------------------------------------------------------------
+why we go for the sub queries in sequel
+
+We use subqueries in SQL when the result of one query is needed to complete another query. They are mainly used for filtering based on aggregated values,
+checking existence of related records, performing row-by-row comparisons, and treating query results as temporary tables.
+Subqueries improve readability and help solve complex conditions that cannot be directly handled using a single query.
+------------------------------------------------------------------------------------------------
 Co related sub query and sub query
 
 SQL> SELECT * FROM Emp  
@@ -92,10 +98,6 @@ from
 from emp e group by deptno) as total_avg) as totalavg
 on sum_sal_dept.sumsal_dept > totalavg.avgsumsal
 
---- waq to get the sum of salary is more than average salary - approach-2
-
-  
-
 -------------------------------------------------------------------------------------------------------
 --- WAQ to previous salary, previous second salary with default value null or 0
 select e.*,
@@ -105,7 +107,7 @@ lead(sal) over (partition by deptno order by deptno desc) as previous_sal, -- de
 lead(sal,2,0) over (partition by deptno order by deptno desc) as previous_2_sal, -- default values 0
 from emp e;
 -------------------------------------------------------------------------------------------------------------------------
---Find customers with successful multiple purchases in the last 1 month. Purchase is considered successful if they are not returned within 1 week of purchase. 
+-- Find customers with successful multiple purchases in the last 1 month. Purchase is considered successful if they are not returned within 1 week of purchase. 
 select * from purchases;
 select * from customers;
 select * from orders;
@@ -180,6 +182,12 @@ where c23.order_year = 2023 and c23.unique_monthly_orders >= 6
 and c24.order_year = 2024 and c24.unique_monthly_orders >= 12
 and c23.customer_id not in (select customer_id from cte where order_year = 2025);
 ---------------------------------------------------------------------------------------------------------------------
+why we use having in sequel?
+
+We use the HAVING clause in SQL to filter grouped results after aggregation. Since aggregate functions like COUNT, SUM, and AVG are calculated after GROUP BY,
+they cannot be used in the WHERE clause. HAVING allows us to apply conditions on these aggregated values
+
+--------------------------------------------------------------------------------------------------------------
 -- Uline interview question
 
 this is the input data  
@@ -1064,6 +1072,7 @@ Scope	       Single query	   Single query	      Multiple queries (within session
 Reusability	Limited (1 place – 1 query)	Limited (multiple references within same query)	Medium (within session)	High	High
 
 ---------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
